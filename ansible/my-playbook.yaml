@@ -23,7 +23,7 @@
           - "docker-ce"
           - "docker-ce-cli"
           - "containerd.io"
-`          - docker-compose-plugin
+          - "docker-compose-plugin"
         state: present
         update_cache: true
 
@@ -36,11 +36,15 @@
       command: git clone https://github.com/arkani0n/docker-terraform-ansilble
 
     - name: update index.html
-      command: echo "Hello from ${{ YOUR_NAME }}" > ~/docker-terraform-ansilble/docker/index.html
+      copy:
+        dest: /home/ubuntu/docker-terraform-ansilble/docker/index.html
+        content: Hello from {{ YOUR_NAME }}
 
 - name: run app
   hosts: my-hosts
   become: true
   tasks:
     - name: docker run
-      command: cd ~/docker-terraform-ansilble/docker/ && docker compose up -d
+      command: docker compose up -d
+      args:
+        chdir: /home/ubuntu/docker-terraform-ansilble/docker/
