@@ -23,16 +23,24 @@
           - "docker-ce"
           - "docker-ce-cli"
           - "containerd.io"
+`          - docker-compose-plugin
         state: present
         update_cache: true
 
-    - name: Install docker-compose
-      command: curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64" -o /usr/local/bin/docker-compose
-
-    - name: chmod docker-compose
-      command: chmod +x /usr/local/bin/docker-compose
-
-- name: runing app
+- name: preraring app
   hosts: my-hosts
+  vars:
+    YOUR_NAME: Arkanion
   tasks:
     - name: git clone
+      command: git clone https://github.com/arkani0n/docker-terraform-ansilble
+
+    - name: update index.html
+      command: echo "Hello from ${{ YOUR_NAME }}" > ~/docker-terraform-ansilble/docker/index.html
+
+- name: run app
+  hosts: my-hosts
+  become: true
+  tasks:
+    - name: docker run
+      command: cd ~/docker-terraform-ansilble/docker/ && docker compose up -d
