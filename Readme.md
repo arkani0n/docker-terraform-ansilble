@@ -15,7 +15,10 @@ How to make it work:
 3. Generate ssh key:
     - paste public key to `./terraform/variables.tf` variable `ec2-public-key`
     - paste privater key in `./my-ssh-key.pem`
+    - run `chmod 600 ./my-ssh-key.pem`
 4. run `./script.sh` -- it will run terraform init and apply, create inventory file for ansible, and using it will make nginx container run on created instance
 
-
+How to veryfi that all worked as expected:
+1. No error duirng script execution
+2. access the created EC2 on it's public IP, port 8080 -- you should get a page with text like "Hello from Arkanion" 
 
