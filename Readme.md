@@ -22,3 +22,6 @@ How to veryfi that all worked as expected:
 1. No error duirng script execution
 2. access the created EC2 on it's public IP, port 8080 -- you should get a page with text like "Hello from Arkanion" 
 
+
+Cleanup:
+Run `terraform destroy` from `./terraform` dir, and approve the destroy. The command will remove all created resources, except S3 bucket used as S3 backend
