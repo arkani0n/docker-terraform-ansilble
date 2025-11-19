@@ -1,6 +1,6 @@
 
 // Variables
-variable "my-ip" {
+variable "my_ip" {
   default = "176.37.44.225"
 }
 

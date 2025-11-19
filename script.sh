@@ -13,4 +13,6 @@ ansible_user=ubuntu
 ansible_ssh_private_key_file=../my-ssh-key.pem
 EOF
 
+# Instance startup takes some time, and executing ansible right after creation of EC2 may result in error "Failed to connect to the host via ssh"
+sleep 20
 ansible-playbook my-playbook.yaml -i inventory
