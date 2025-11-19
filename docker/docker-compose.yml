@@ -1,0 +1,13 @@
+version: "3.5"
+
+services:
+
+  nginx:
+    image: test-nginx:latest
+    restart: unless-stopped
+    volumes:
+      - ./index.html:/data/www/index.html
+    ports:
+      - 8080:80
+    environment:
+      - NGINX_PORT=80
